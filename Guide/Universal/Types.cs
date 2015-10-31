@@ -20,6 +20,21 @@ namespace Guide.Universal
         M = 1000
     }
 
+
+    public static class RomanExtensions
+    {
+        public static bool IsRoman(this string test)
+        {
+            return Enum.IsDefined(typeof(Roman), test);
+        }
+
+        public static Roman ToRoman(this string test)
+        {
+            return (Roman)Enum.Parse(typeof(Roman), test);
+        }
+
+    }
+
     public class RomanNumber     {
 
         /// <summary>
