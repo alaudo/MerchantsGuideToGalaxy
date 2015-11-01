@@ -11,7 +11,19 @@ namespace Guide.Convertor
     {
         private readonly char[] NUMBER_SEPARATORS = { ' ' };
 
-        Dictionary<string, Roman> _conversions;
+        Dictionary<string, Roman> _conversions = new Dictionary<string, Roman>();
+        Dictionary<string, Tuple<int,int>> _exchanges = new Dictionary<string, Tuple<int,int>>();
+
+        public Tuple<int,int> this[string currency]
+        {
+            get
+            {
+                return _exchanges[currency];
+            }
+
+            private set { }
+
+        }
 
 
 
@@ -26,33 +38,52 @@ namespace Guide.Convertor
 
         }
 
-        public bool TryConvert(string input, out RomanNumber result)
+        public bool TryAddExchangeRate(string currency, int currencyvalue, int moneyvalue)
         {
-            result = new RomanNumber();
+            // if this conversion already defined then report error
+            if (_conversions.ContainsKey(currency)) return false;
 
-            // get our words
-            var words = input
-                        .Split(NUMBER_SEPARATORS, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(word => word.Trim())
-                        .ToList();
-
-            // check if we have an empty string
-            if (words.Count == 0) return false;
-
-            // check if all words are in the conversion dictionary
-            if (!words.All(word => _conversions.ContainsKey(word))) return false;
-
-            // now it is safe to convert
-            result = new RomanNumber
-                (
-                    words
-                        .Select(word => _conversions[word])
-                        .ToList()
-                );
-
+            // else add this conversion
+            _exchanges[currency] = Tuple.Create(currencyvalue, moneyvalue);
             return true;
 
         }
 
+        public bool TryConvert(string input, out RomanNumber result)
+        {
+            var seq = new List<Roman>();
+            var ret = ParseNumber(input, _conversions, out seq);
+            result = new RomanNumber(seq);
+            return ret;
+        }
+
+        private bool ParseNumber(string input, Dictionary<string,Roman> algebra, out List<Roman> onumber)
+        {
+            onumber = new List<Roman>();
+
+            input = input.Trim();
+            while (input.Length > 0)
+            {
+                var next = algebra.Keys.Where(k => input.StartsWith(k)).ToList();
+
+                if (next.Count() < 1)
+                {
+                    return false;
+                }
+                else
+                {
+                    var number = next.OrderByDescending(num => num.Length).First(); // take the longest that fits
+                    onumber.Add(algebra[number]);
+                    input = input.Substring(number.Length);
+                }
+                input = input.Trim();
+            }
+            return true;
+        }
+
+        internal bool IsValidCurrency(string currency)
+        {
+            return _exchanges.ContainsKey(currency);
+        }
     }
 }
