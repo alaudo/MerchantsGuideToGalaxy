@@ -9,7 +9,6 @@ namespace Guide.Convertor
 {
     public class MartianToRomanConverter
     {
-        private readonly char[] NUMBER_SEPARATORS = { ' ' };
 
         Dictionary<string, Roman> _conversions = new Dictionary<string, Roman>();
         Dictionary<string, Tuple<int,int>> _exchanges = new Dictionary<string, Tuple<int,int>>();
@@ -24,8 +23,6 @@ namespace Guide.Convertor
             private set { }
 
         }
-
-
 
         public bool TryAddConversion(string word, Roman r)
         {

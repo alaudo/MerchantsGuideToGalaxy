@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Guide.Parser
 {
     /// <summary>
-    /// Main abstract class of the union
+    /// Discriminated union pattern in OOP, see F# for explanation
     /// </summary>
     public abstract class ParserResult
     {
@@ -16,7 +16,8 @@ namespace Guide.Parser
     }
 
     /// <summary>
-    /// Digit definition class
+    /// Digit definition class ("xxx is L")
+    /// F# syntax: DigitDefinition of string * Roman
     /// </summary>
     public class DigitDefinition: ParserResult
     {
@@ -30,6 +31,10 @@ namespace Guide.Parser
         }
     }
 
+    /// <summary>
+    /// Conversion definition ("xxx SMT is ### Credits")
+    /// F# syntax: ConversionDefinition of RomanNumber * Roman * int
+    /// </summary>
     public class ConversionDefinition : ParserResult
     {
         public readonly RomanNumber Number;
@@ -45,6 +50,10 @@ namespace Guide.Parser
 
     }
 
+    /// <summary>
+    /// Request to convert value ("how much/many xxx SMT ?")
+    /// F# syntax: ConversionRequest of RomanNumber * string * string
+    /// </summary>
     public class ConversionRequest : ParserResult
     {
         public readonly RomanNumber Number;
@@ -60,6 +69,10 @@ namespace Guide.Parser
 
     }
 
+    /// <summary>
+    /// Failed to parse result or parsed data failed validation
+    /// F# syntax: InvalidResult of string
+    /// </summary>
     public class InvalidResult : ParserResult
     {
         public readonly string Original;

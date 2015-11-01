@@ -20,24 +20,40 @@ namespace Guide.Universal
         M = 1000
     }
 
-
+    /// <summary>
+    /// Container for Roman enum extensions (to allow fluent interface syntax)
+    /// </summary>
     public static class RomanExtensions
     {
+        /// <summary>
+        /// If the string is the valid Roman digit
+        /// </summary>
+        /// <param name="test">string to test</param>
+        /// <returns></returns>
         public static bool IsRoman(this string test)
         {
             return Enum.IsDefined(typeof(Roman), test);
         }
 
+        /// <summary>
+        /// Converts string to Roman if possible
+        /// </summary>
         public static Roman ToRoman(this string test)
         {
             return (Roman)Enum.Parse(typeof(Roman), test);
         }
 
+        /// <summary>
+        /// Converts Roman digit to its integer value
+        /// </summary>
         public static int ToInteger(this Roman digit)
         {
             return (int)digit;
         }
 
+        /// <summary>
+        /// If the Roman digit can be repeated 
+        /// </summary>
         public static bool IsRepeatable(this Roman digit)
         {
             return     (digit == Roman.I)
@@ -47,6 +63,9 @@ namespace Guide.Universal
 
         }
 
+        /// <summary>
+        /// If this Roman digit can appear only once
+        /// </summary>
         public static bool IsSingle(this Roman digit)
         {
             return (digit == Roman.V)
@@ -56,29 +75,50 @@ namespace Guide.Universal
 
     }
 
-    public class RomanNumber     {
+    /// <summary>
+    /// Exchange rates
+    /// </summary>
+    public struct ExchangeRate
+    {
+        public readonly string Currency;
+        public readonly int Amount;
+        public readonly int Value;
+    }
 
-        /// <summary>
-        /// Internal representation of the number
-        /// </summary>
-        readonly List<Roman> _digits;
+    /// <summary>
+    /// Current exchange rates on Martian market
+    /// </summary>
+    public class ExchangeRates : Dictionary<string, ExchangeRate>
+    {
+        // TODO: re-write it
+    }
 
+    /// <summary>
+    /// Dictionary of the Martian number language
+    /// </summary>
+    public class Martian : Dictionary<string, Roman>
+    {
+        // TODO: re-write it
+    }
+
+    public class RomanNumber : List<Roman>
+    {
         public bool IsValid {
             get
             {
-                return ValidateSingles(_digits) && Validate(_digits, Roman.M);
+                return ValidateSingles(this) && Validate(this, Roman.M);
             }
 
             private set { } }
 
         public override string ToString()
         {
-            return string.Join(string.Empty, _digits.Select(d => d.ToString()));
+            return string.Join(string.Empty, this.Select(d => d.ToString()));
         }
 
         public int ToInteger()
         {
-            return RomanToInteger(_digits);
+            return RomanToInteger(this);
         }
 
 
@@ -154,20 +194,8 @@ namespace Guide.Universal
         /// <param name="digits"></param>
         public RomanNumber(List<Roman> digits)
         {
-            _digits = digits;
+            AddRange(digits);
         }
-
-        /// <summary>
-        /// Empty constructor
-        /// </summary>
-        public RomanNumber()
-        {
-            _digits = new List<Roman>();
-        }
-        
 
     }
-
-
-
 }
