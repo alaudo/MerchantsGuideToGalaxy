@@ -39,13 +39,20 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Convertor\StringConverters.cs" />
+    <Compile Include="Convertor\MartianToRomanConverter.cs" />
     <Compile Include="Helpers\LinqHelper.cs" />
     <Compile Include="Helpers\StringHelpers.cs" />
-    <Compile Include="Parser\Parser.cs" />
-    <Compile Include="Parser\ParserResults.cs" />
+    <Compile Include="Parser\ParserResults\ConversionDefinition.cs" />
+    <Compile Include="Parser\ParserResults\ConversionRequest.cs" />
+    <Compile Include="Parser\ParserResults\DigitDefinition.cs" />
+    <Compile Include="Parser\ParserResults\InvalidResult.cs" />
+    <Compile Include="Parser\MartianParser.cs" />
+    <Compile Include="Parser\ParserResults\ParserResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Universal\Types.cs" />
+    <Compile Include="Universal\ExchangeRate.cs" />
+    <Compile Include="Universal\Roman.cs" />
+    <Compile Include="Universal\RomanNumber.cs" />
+    <Compile Include="Universal\RomanExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Validator\" />

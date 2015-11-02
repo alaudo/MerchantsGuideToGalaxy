@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Guide.Helpers
 {
+    /// <summary>
+    /// Extension methods for LINQ
+    /// </summary>
     public static class LinqHelper
     {
         public static IEnumerable<T> AllButLast<T>(this IList<T> input)
