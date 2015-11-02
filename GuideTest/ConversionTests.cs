@@ -5,8 +5,11 @@ using Guide.Parser;
 
 namespace GuideTest
 {
+    /// <summary>
+    /// Test unit and vocabulary conversions
+    /// </summary>
     [TestClass]
-    public class UnitTest1
+    public class ConversionTests
     {
         [TestMethod]
         public void TestMethod1()

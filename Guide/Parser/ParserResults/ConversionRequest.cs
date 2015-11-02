@@ -8,15 +8,13 @@ namespace Guide.Parser
     /// </summary>
     public class ConversionRequest : ParserResult
     {
-        public readonly RomanNumber Number;
+        public readonly string Number;
 
         public readonly string Currency;
 
-        public readonly string Original;
-
-        public ConversionRequest(RomanNumber number, string currency, string original)
+        public ConversionRequest(string number, string currency)
         {
-            Number = number; Currency = currency; Original = original;
+            Number = number; Currency = currency; 
         }
 
     }

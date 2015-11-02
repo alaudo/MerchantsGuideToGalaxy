@@ -8,13 +8,13 @@ namespace Guide.Parser
     /// </summary>
     public class ConversionDefinition : ParserResult
     {
-        public readonly RomanNumber Number;
+        public readonly string Number;
 
         public readonly string Currency;
 
         public readonly int Credits;
 
-        public ConversionDefinition(RomanNumber number, string currency, int credits)
+        public ConversionDefinition(string number, string currency, int credits)
         {
             Number = number; Currency = currency; Credits = credits;
         }
