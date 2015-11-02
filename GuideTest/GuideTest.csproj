@@ -51,6 +51,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Helpers\ExtractionHelper.cs" />
     <Compile Include="ValidationTests.cs" />
     <Compile Include="ConversionTests.cs" />
     <Compile Include="ParsingTests.cs" />
